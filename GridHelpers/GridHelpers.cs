@@ -256,6 +256,7 @@ namespace GridHelpers
                                                                               .Select(int.Parse)
                                                                               .ToArray();
                                     })
+
                                    .ToDictionary(x => x[0], x => x[1]);
 
             if (starColumns.Count == 0) return;
@@ -286,7 +287,7 @@ namespace GridHelpers
             {
                 if (starRows.TryGetValue(i, out int nbrStar))
                     grid.RowDefinitions[i].Height =
-                        new GridLength(nbrStar, GridUnitType.Star);
+                        new GridLength(nbrStar, type);
             }
             //string[] starRows =
             //    GetStarRows(grid).Split(',');
