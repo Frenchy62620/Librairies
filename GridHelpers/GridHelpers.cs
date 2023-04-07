@@ -256,6 +256,7 @@ namespace GridHelpers
                                                                               .Select(int.Parse)
                                                                               .ToArray();
                                     })
+
                                    .ToDictionary(x => x[0], x => x[1]);
 
             if (starColumns.Count == 0) return;
