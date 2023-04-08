@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -233,33 +234,34 @@ namespace GridHelpers
 
         private static void SetPixelOrStarColumns(Grid grid, GridUnitType type = GridUnitType.Star)
         {
-
-            //another way using Regex.Split
-            //var starColumns = Regex.Split(GetStarColumns(grid), @",(?![^()]*\))")
-            //                       .Where(x => !string.IsNullOrEmpty(x))
-            //                       .Select(m =>
-            //                       {
-            //                           var v = Regex.Replace(m, @"[\(\) ]", "");
-            //                           return (v.Contains(",") ? v : $"{v},1").Split(',')
-            //                                                                  .Select(int.Parse)
-            //                                                                  .ToArray();
-            //                       })
-            //                       .ToDictionary(x => x[0], x => x[1]);
-
-            var regex = new Regex(@"(?:(?:\((?>[^()]+|\((?<number>)|\)(?<-number>))*(?(number)(?!))\))|[^,])+");
-            var starColumns = regex.Matches(GetStarColumns(grid))
-                                   .Cast<Match>()
-                                   .Select(m => 
-                                   {
-                                       var v = Regex.Replace(m.Value, @"[\(\) ]", "");
-                                       return (v.Contains(",") ? v : $"{v},1").Split(',')
-                                                                              .Select(int.Parse)
-                                                                              .ToArray();
-                                    })
-
-                                   .ToDictionary(x => x[0], x => x[1]);
+            var g = GetStarColumns(grid);
+            var starColumns = getGroups(g);
 
             if (starColumns.Count == 0) return;
+
+            if (type == GridUnitType.Pixel)
+            {
+                if (g.Contains("*"))
+                {
+                    var p = g.Replace("(", "")
+                             .Replace(")", "")
+                             .Split(',')
+                             .Select(int.Parse)
+                             .ToArray();
+                    foreach (var x in grid.ColumnDefinitions)
+                        x.Width = new GridLength(p[1], type);
+                    return;
+                }
+            }
+            else
+            {
+                if (g.Contains("*"))
+                {
+                    foreach (var g in grid.ColumnDefinitions)
+                        g.Width = new GridLength(1, type);
+                    return;
+                }
+            }
 
             for (int i = 0; i < grid.ColumnDefinitions.Count; i++)
             {
@@ -271,17 +273,7 @@ namespace GridHelpers
 
         private static void SetPixelOrStarRows(Grid grid, GridUnitType type = GridUnitType.Star)
         {
-            var regex = new Regex(@"(?:(?:\((?>[^()]+|\((?<number>)|\)(?<-number>))*(?(number)(?!))\))|[^,])+");
-            var starRows = regex.Matches(GetStarRows(grid))
-                                .Cast<Match>()
-                                .Select(m =>
-                                {
-                                    var v = Regex.Replace(m.Value, @"[\(\) ]", "");
-                                    return (v.Contains(",") ? v : $"{v},1").Split(',')
-                                                                            .Select(int.Parse)
-                                                                            .ToArray();
-                                })
-                                .ToDictionary(x => x[0], x => x[1]);
+            var starRows = getGroups(GetStarRows(grid));
 
             for (int i = 0; i < grid.ColumnDefinitions.Count; i++)
             {
@@ -289,15 +281,31 @@ namespace GridHelpers
                     grid.RowDefinitions[i].Height =
                         new GridLength(nbrStar, type);
             }
-            //string[] starRows =
-            //    GetStarRows(grid).Split(',');
-
-            //for (int i = 0; i < grid.RowDefinitions.Count; i++)
-            //{
-            //    if (starRows.Contains(i.ToString()))
-            //        grid.RowDefinitions[i].Height =
-            //            new GridLength(1, GridUnitType.Star);
-            //}
+        }
+        private static Dictionary<int, int> getGroups(string s)
+        {
+            var regex = new Regex(@"(?:(?:\((?>[^()]+|\((?<number>)|\)(?<-number>))*(?(number)(?!))\))|[^,])+");
+            return regex.Matches(s)
+                        .Cast<Match>()
+                        .Select(m =>
+                        {
+                            var v = Regex.Replace(m.Value, @"[\(\) ]", "");
+                            return (v.Contains(",") ? v : $"{v},1").Split(',')
+                                                                    .Select(int.Parse)
+                                                                    .ToArray();
+                        })
+                        .ToDictionary(x => x[0], x => x[1]);
+            //another way using Regex.Split
+            //return Regex.Split(s, @",(?![^()]*\))")
+            //            .Where(x => !string.IsNullOrEmpty(x))
+            //            .Select(m =>
+            //            {
+            //                var v = Regex.Replace(m, @"[\(\) ]", "");
+            //                return (v.Contains(",") ? v : $"{v},1").Split(',')
+            //                                                        .Select(int.Parse)
+            //                                                        .ToArray();
+            //            })
+            //            .ToDictionary(x => x[0], x => x[1]);
         }
     }
 }
