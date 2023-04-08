@@ -257,8 +257,8 @@ namespace GridHelpers
             {
                 if (g.Contains("*"))
                 {
-                    foreach (var g in grid.ColumnDefinitions)
-                        g.Width = new GridLength(1, type);
+                    foreach (var x in grid.ColumnDefinitions)
+                        x.Width = new GridLength(1, type);
                     return;
                 }
             }
