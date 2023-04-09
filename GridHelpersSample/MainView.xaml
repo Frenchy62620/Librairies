@@ -4,16 +4,142 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:gh="clr-namespace:GridHelpers;assembly=GridHelpers"
+        xmlns:cal="http://www.caliburnproject.org"       
         xmlns:local="clr-namespace:GridHelpersSample"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
+        Title="MainView" Height="600" Width="1000">
+    <Window.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="Width" Value="120" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="Blue" />
+        </Style>
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Width" Value="120" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Regular" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="cal:Message.Attach" Value="[Event LostFocus] = [Action TextBox_LostFocus($source, $this)]" />
+            <Style.Triggers>
+                <Trigger Property="Name" Value="RowCount">
+                    <Setter Property="Width" Value="30"/>
+                </Trigger>
+                <Trigger Property="Name" Value="ColumnCount">
+                    <Setter Property="Width" Value="30"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <DataTemplate DataType="{x:Type Grid}">
+            <ItemsControl ItemsSource="{Binding Path=Children}">
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="Grid.Row" Value="{Binding GridRow}" />
+                        <Setter Property="Grid.Column" Value="{Binding GridColumn}" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid ShowGridLines="True"  Style="{Binding Path=Style}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height=".5*" />
+                                <RowDefinition Height=".5*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".5*" />
+                                <ColumnDefinition Width=".5*" />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </DataTemplate>
+    </Window.Resources>
     <Grid
         gh:GridHelpers.RowCount="2"
-        gh:GridHelpers.ColumnCount="2"
-        gh:GridHelpers.StarRows="0,(1,5)">
+        gh:GridHelpers.ColumnCount="1"
+        gh:GridHelpers.StarRows="1"
+        gh:GridHelpers.StarColumns="*">
+        <StackPanel Orientation="Vertical" Grid.Row="0" >
+            <Separator />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="RowCount:" Style="{StaticResource LabelStyle}" />
+                <TextBox x:Name="RowCount" Style="{StaticResource TextBoxStyle}" />
+                <Label Content="StarRows:" Style="{StaticResource LabelStyle}" />
+                <TextBox x:Name="StarRows" Style="{StaticResource TextBoxStyle}" />
+                <Label Content="PixelRows:" Style="{StaticResource LabelStyle}" />
+                <TextBox x:Name="PixelRows" Style="{StaticResource TextBoxStyle}" />
+                <Button x:Name="Valider" Content="Valider la saisie" Width="100" 
+                        Margin="30,20,0,-20" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="ColumnCount:" Style="{StaticResource LabelStyle}" />
+                <TextBox x:Name="ColumnCount" Style="{StaticResource TextBoxStyle}" />
+                <Label Content="StarColumns:" Style="{StaticResource LabelStyle}" />
+                <TextBox x:Name="StarColumns" Style="{StaticResource TextBoxStyle}" />
+                <Label Content="PixelColumns:" Style="{StaticResource LabelStyle}" />
+                <TextBox x:Name="PixelColumns" Style="{StaticResource TextBoxStyle}" />
+                <Button Width="100" Visibility="Hidden" Height="0" Margin="30,0,0,0"/>
+            </StackPanel>
+            <Separator />
+        </StackPanel>
+        <Grid Grid.Row="1" x:Name="TestGrid">
+            <!--<Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>-->
 
-        <ComboBox Name="ViewModels" Grid.Row="0" Grid.Column="0" 
-                  Height="50" Width="200" Margin="10"/>
-
+            <ItemsControl ItemsSource="{Binding ButtonViewModels}">
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="Grid.Row" Value="{Binding GridRow}" />
+                        <Setter Property="Grid.Column" Value="{Binding GridColumn}" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemTemplate >
+                    <DataTemplate >
+                        <Button cal:Message.Attach="[Event Click] = [Action OnButtonClick($dataContext)]"
+                                Content="{Binding Content}"/>
+                    </DataTemplate >
+                </ItemsControl.ItemTemplate >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid ShowGridLines="False"         
+                              gh:GridHelpers.RowCount = "{Binding RowCount, Mode=TwoWay}"
+                              gh:GridHelpers.ColumnCount = "{Binding ColumnCount, Mode=TwoWay}"
+                              gh:GridHelpers.StarRows = "{Binding StarRows, Mode=TwoWay}"
+                              gh:GridHelpers.StarColumns = "{Binding StarColumns, Mode=TwoWay}"
+                              gh:GridHelpers.PixelRows = "{Binding PixelRows, Mode=TwoWay}"
+                              gh:GridHelpers.PixelColumns = "{Binding PixelColumns, Mode=TwoWay}" >
+                            <!--<Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>-->
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <!-- Now define a container that will host the ItemsControl -->
+                <!--<ItemsControl.ItemsPanel >
+                    <ItemsPanelTemplate >
+                        <VirtualizingStackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate >
+                </ItemsControl.ItemsPanel >-->
+            </ItemsControl >
+        </Grid>
     </Grid>
 </Window>

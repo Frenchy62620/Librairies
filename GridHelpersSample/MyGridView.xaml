@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="GridHelpersSample.MyGridView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:gh="clr-namespace:GridHelpers;assembly=GridHelpers"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:local="clr-namespace:GridHelpersSample"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <ItemsControl ItemsSource="{Binding ButtonViewModels}">
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Grid.Row" Value="{Binding GridRow}" />
+                    <Setter Property="Grid.Column" Value="{Binding GridColumn}" />
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <ItemsControl.ItemTemplate >
+                <DataTemplate >
+                    <Button cal:Message.Attach="[Event Click] = [Action OnButtonClick($dataContext)]"
+                                Content="{Binding Content}"/>
+                </DataTemplate >
+            </ItemsControl.ItemTemplate >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid ShowGridLines="true" 
+                        gh:GridHelpers.RowCount = "{Binding RowCount, Mode=TwoWay}"
+                              gh:GridHelpers.ColumnCount = "{Binding ColumnCount, Mode=TwoWay}"
+                              gh:GridHelpers.StarRows = "{Binding StarRows, Mode=TwoWay}"
+                              gh:GridHelpers.StarColumns = "{Binding StarColumns, Mode=TwoWay}"
+                              gh:GridHelpers.PixelRows = "{Binding PixelRows, Mode=TwoWay}"
+                              gh:GridHelpers.PixelColumns = "{Binding PixelColumns, Mode=TwoWay}" >
+                        <!--<Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>-->
+                    </Grid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <!-- Now define a container that will host the ItemsControl -->
+            <!--<ItemsControl.ItemsPanel >
+                    <ItemsPanelTemplate >
+                        <VirtualizingStackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate >
+                </ItemsControl.ItemsPanel >-->
+        </ItemsControl >
+    </Grid>
+</UserControl>

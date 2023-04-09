@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -6,8 +7,17 @@ using System.Windows.Controls;
 
 namespace GridHelpers
 {
+
     public class GridHelpers
     {
+        private enum GridUnit
+        {
+            Row,
+            Column,
+            PixelRow,
+            PixelColumn
+        }
+
         #region RowCount Property
 
         /// <summary>
@@ -45,7 +55,7 @@ namespace GridHelpers
                 grid.RowDefinitions.Add(
                     new RowDefinition() { Height = GridLength.Auto });
 
-            SetPixelOrStarRows(grid);
+            SetPixelOrStar(grid, GridUnit.Row, GridUnitType.Star);
         }
 
         #endregion
@@ -87,7 +97,7 @@ namespace GridHelpers
                 grid.ColumnDefinitions.Add(
                     new ColumnDefinition() { Width = GridLength.Auto });
 
-            SetPixelOrStarColumns(grid);
+            SetPixelOrStar(grid, GridUnit.Column, GridUnitType.Star);
         }
 
         #endregion
@@ -119,10 +129,10 @@ namespace GridHelpers
         public static void StarRowsChanged(
             DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (!(obj is Grid) || string.IsNullOrEmpty(e.NewValue.ToString()))
+            if (!(obj is Grid) || string.IsNullOrEmpty(e.NewValue?.ToString()))
                 return;
 
-            SetPixelOrStarRows((Grid)obj);
+            SetPixelOrStar((Grid)obj, GridUnit.Row, GridUnitType.Star);
         }
 
         #endregion
@@ -154,10 +164,10 @@ namespace GridHelpers
         public static void StarColumnsChanged(
             DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (!(obj is Grid) || string.IsNullOrEmpty(e.NewValue.ToString()))
+            if (!(obj is Grid) || string.IsNullOrEmpty(e.NewValue?.ToString()))
                 return;
 
-            SetPixelOrStarColumns((Grid)obj);
+            SetPixelOrStar((Grid)obj, GridUnit.Column, GridUnitType.Star);
         }
 
         #endregion
@@ -189,10 +199,10 @@ namespace GridHelpers
         public static void PixelRowsChanged(
             DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (!(obj is Grid) || string.IsNullOrEmpty(e.NewValue.ToString()))
+            if (!(obj is Grid) || string.IsNullOrEmpty(e.NewValue?.ToString()))
                 return;
 
-            SetPixelOrStarRows((Grid)obj, GridUnitType.Pixel);
+            SetPixelOrStar((Grid)obj, GridUnit.PixelRow, GridUnitType.Pixel);
         }
 
         #endregion
@@ -224,32 +234,39 @@ namespace GridHelpers
         public static void PixelColumnsChanged(
             DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (!(obj is Grid) || string.IsNullOrEmpty(e.NewValue.ToString()))
+            if (!(obj is Grid) || string.IsNullOrEmpty(e.NewValue?.ToString()))
                 return;
 
-            SetPixelOrStarColumns((Grid)obj, GridUnitType.Pixel);
+            SetPixelOrStar((Grid)obj, GridUnit.PixelColumn, GridUnitType.Pixel);
         }
 
         #endregion
 
-        private static void SetPixelOrStarColumns(Grid grid, GridUnitType type = GridUnitType.Star)
+        private static void SetPixelOrStar(Grid grid, GridUnit unit, GridUnitType type)
         {
-            var g = GetStarColumns(grid);
-            var starColumns = getGroups(g);
+            var g = unit == GridUnit.Row ? GetStarRows(grid) :
+                    unit == GridUnit.Column ? GetStarColumns(grid) :
+                    unit == GridUnit.PixelRow ? GetPixelRows(grid) : GetPixelColumns(grid);
 
-            if (starColumns.Count == 0) return;
+            if (string.IsNullOrEmpty(g) || !getGroups(g, out var groups))
+                return;
 
             if (type == GridUnitType.Pixel)
             {
                 if (g.Contains("*"))
                 {
-                    var p = g.Replace("(", "")
-                             .Replace(")", "")
-                             .Split(',')
-                             .Select(int.Parse)
-                             .ToArray();
-                    foreach (var x in grid.ColumnDefinitions)
-                        x.Width = new GridLength(p[1], type);
+                    //var p = Regex.Replace(g, @"[\(\)]", "")
+                    //             .Split(',')
+                    //             .Select(int.Parse)
+                    //             .ToArray();
+
+                    if (unit == GridUnit.PixelRow)
+                        foreach (var x in grid.RowDefinitions)
+                            x.Height = new GridLength(groups[groups.Keys.First()], type);
+                    else
+                        foreach (var x in grid.ColumnDefinitions)
+                            x.Width = new GridLength(groups[groups.Keys.First()], type);
+
                     return;
                 }
             }
@@ -257,30 +274,51 @@ namespace GridHelpers
             {
                 if (g.Contains("*"))
                 {
-                    foreach (var x in grid.ColumnDefinitions)
-                        x.Width = new GridLength(1, type);
+                    if (unit == GridUnit.Row)
+                        foreach (var x in grid.RowDefinitions)
+                            x.Height = new GridLength(1, type);
+                    else
+                        foreach (var x in grid.ColumnDefinitions)
+                            x.Width = new GridLength(1, type);
                     return;
                 }
             }
 
-            for (int i = 0; i < grid.ColumnDefinitions.Count; i++)
+
+            if ((int)unit % 2 == (int)GridUnit.Row)
             {
-                if(starColumns.TryGetValue(i, out int nbrStar))
+                for (int i = 0; i < grid.RowDefinitions.Count; i++)
+                {
+                    if (groups.TryGetValue(i, out int nbrStar))
+                        grid.RowDefinitions[i].Height =
+                            new GridLength(nbrStar, type);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < grid.ColumnDefinitions.Count; i++)
+                {
+                    if (groups.TryGetValue(i, out int nbrStar))
                         grid.ColumnDefinitions[i].Width =
                             new GridLength(nbrStar, type);
+                }
             }
         }
 
-        private static void SetPixelOrStarRows(Grid grid, GridUnitType type = GridUnitType.Star)
+        private static bool getGroups(string s, out Dictionary<int, int> dico)
         {
-            var starRows = getGroups(GetStarRows(grid));
-
-            for (int i = 0; i < grid.ColumnDefinitions.Count; i++)
-            {
-                if (starRows.TryGetValue(i, out int nbrStar))
-                    grid.RowDefinitions[i].Height =
-                        new GridLength(nbrStar, type);
-            }
+            var regex = new Regex(@"(?:(?:\((?>[^()]+|\((?<number>)|\)(?<-number>))*(?(number)(?!))\))|[^,])+");
+            dico = regex.Matches(s)
+                        .Cast<Match>()
+                        .Select(m =>
+                        {
+                            var v = Regex.Replace(m.Value, @"[\(\) ]", "");
+                            return (v.Contains(",") ? v.Trim() : $"{v.Trim()},1").Split(',')
+                                            .Select(x => x == "*" ? -999 : int.Parse(x))
+                                            .ToArray();
+                        })
+                        .ToDictionary(x => x[0], x => x[1]);
+            return dico.Any();
         }
         private static Dictionary<int, int> getGroups(string s)
         {
