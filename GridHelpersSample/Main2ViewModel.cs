@@ -7,6 +7,9 @@ namespace GridHelpersSample
 {
     public class Main2ViewModel : Screen
     {
+        private bool needToReload = false;
+        private bool justChange = false;
+
         private readonly IResolutionRoot _resolutionRoot;
         private readonly IKernel _kernel;
         public BindableCollection<ButtonViewModel> ButtonViewModels { get; set; }
@@ -32,7 +35,7 @@ namespace GridHelpersSample
             PixelRows = "";
             PixelColumns = "";
 
-            AddNewContent();
+            Valider();
         }
 
         #region datas for defining grid
@@ -42,6 +45,8 @@ namespace GridHelpersSample
             get { return rowCount; }
             set
             {
+                if (value != rowCount)
+                    needToReload = true;
                 rowCount = value;
                 NotifyOfPropertyChange(() => RowCount);
             }
@@ -52,6 +57,9 @@ namespace GridHelpersSample
             get { return columnCount; }
             set
             {
+
+                if (value != columnCount)
+                    needToReload = true;
                 columnCount = value;
                 NotifyOfPropertyChange(() => ColumnCount);
             }
@@ -62,6 +70,8 @@ namespace GridHelpersSample
             get { return starRows; }
             set
             {
+                if (value != starRows)
+                    justChange = true;
                 starRows = value;
                 NotifyOfPropertyChange(() => StarRows);
             }
@@ -72,6 +82,8 @@ namespace GridHelpersSample
             get { return starColumns; }
             set
             {
+                if (value != starColumns)
+                    justChange = true;
                 starColumns = value;
                 NotifyOfPropertyChange(() => StarColumns);
             }
@@ -83,6 +95,9 @@ namespace GridHelpersSample
             get { return pixelRows; }
             set
             {
+
+                if (value != pixelRows)
+                    justChange = true;
                 pixelRows = value;
                 NotifyOfPropertyChange(() => PixelRows);
             }
@@ -94,6 +109,9 @@ namespace GridHelpersSample
             get { return pixelColumns; }
             set
             {
+
+                if (value != pixelColumns)
+                    justChange = true;
                 pixelColumns = value;
                 NotifyOfPropertyChange(() => PixelColumns);
             }
@@ -101,8 +119,14 @@ namespace GridHelpersSample
         #endregion
 
         public void Valider()
-        {            
-            AddNewContent();
+        {
+            if (needToReload)
+                AddNewContent();
+            if(!needToReload && justChange)
+                myGridViewModel.UpdateParams();
+
+            needToReload = false;
+            justChange = false;
         }
         public List<ButtonViewModel> CreateButton()
         {

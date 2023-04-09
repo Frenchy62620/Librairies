@@ -6,8 +6,10 @@ namespace GridHelpersSample
     public class MyGridViewModel : Screen
     {
         public BindableCollection<ButtonViewModel> ButtonViewModels { get; set; }
+        private readonly Main2ViewModel main2ViewModel;
         public MyGridViewModel(Main2ViewModel main2ViewModel)
         {
+            this.main2ViewModel = main2ViewModel;
             RowCount = main2ViewModel.RowCount;
             ColumnCount = main2ViewModel.ColumnCount;
             StarRows = main2ViewModel.StarRows;
@@ -44,6 +46,7 @@ namespace GridHelpersSample
             get { return starRows; }
             set
             {
+                if (value == starRows) return;
                 starRows = value;
                 NotifyOfPropertyChange(() => StarRows);
             }
@@ -54,6 +57,7 @@ namespace GridHelpersSample
             get { return starColumns; }
             set
             {
+                if (value == starColumns) return;
                 starColumns = value;
                 NotifyOfPropertyChange(() => StarColumns);
             }
@@ -65,6 +69,7 @@ namespace GridHelpersSample
             get { return pixelRows; }
             set
             {
+                if (value == pixelRows) return;
                 pixelRows = value;
                 NotifyOfPropertyChange(() => PixelRows);
             }
@@ -75,12 +80,20 @@ namespace GridHelpersSample
             get { return pixelColumns; }
             set
             {
+                if (value == pixelColumns) return;
                 pixelColumns = value;
                 NotifyOfPropertyChange(() => PixelColumns);
             }
         }
-        #endregion
 
+        public void UpdateParams()
+        {
+            StarRows = main2ViewModel.StarRows;
+            StarColumns = main2ViewModel.StarColumns;
+            PixelRows = main2ViewModel.PixelRows;
+            PixelColumns = main2ViewModel.PixelColumns;
+        }
+        #endregion
         public void OnButtonClick(ButtonViewModel context)
         {
 
