@@ -19,9 +19,8 @@ namespace GridHelpersSample
             kernel = new StandardKernel();
             kernel.Bind<IWindowManager>().To<WindowManager>().InSingletonScope();
             kernel.Bind<IEventAggregator>().To<EventAggregator>().InSingletonScope();
-            kernel.Bind<MyGridViewModel>().ToSelf().InTransientScope();
-            //kernel.Bind<MyGridViewModel>().ToSelf().InSingletonScope();
-            var bindings0 = kernel.GetBindings(typeof(MyGridViewModel));
+
+            //var bindings0 = kernel.GetBindings(typeof(MyGridViewModel));
             //var bindings1 = kernel.GetBindings(typeof(MainViewModel));
         }
         protected override async void OnStartup(object sender, StartupEventArgs e)

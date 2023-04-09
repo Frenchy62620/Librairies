@@ -1,11 +1,11 @@
 ﻿using Caliburn.Micro;
+using System.Collections.Generic;
 
 namespace GridHelpersSample
 {
     public class MyGridViewModel : Screen
     {
         public BindableCollection<ButtonViewModel> ButtonViewModels { get; set; }
-
         public MyGridViewModel(Main2ViewModel main2ViewModel)
         {
             RowCount = main2ViewModel.RowCount;
@@ -70,7 +70,6 @@ namespace GridHelpersSample
             }
         }
         private string pixelColumns;
-
         public string PixelColumns
         {
             get { return pixelColumns; }

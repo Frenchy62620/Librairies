@@ -62,6 +62,6 @@
             </StackPanel>
             <Separator />
         </StackPanel>
-        <ContentControl x:Name="myGridViewModel" Grid.Row="1"/>
+        <ContentControl  x:Name="myGridViewModel" Grid.Row="1"/>
     </Grid>
 </Window>

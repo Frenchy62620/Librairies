@@ -10,7 +10,17 @@ namespace GridHelpersSample
         private readonly IResolutionRoot _resolutionRoot;
         private readonly IKernel _kernel;
         public BindableCollection<ButtonViewModel> ButtonViewModels { get; set; }
-        public MyGridViewModel myGridViewModel { get; set; }
+
+        private MyGridViewModel _myGridViewModel;
+        public MyGridViewModel myGridViewModel
+        {
+            get { return _myGridViewModel; }
+            set
+            {
+                _myGridViewModel = value;
+                NotifyOfPropertyChange(() => myGridViewModel);
+            }
+        }
         public Main2ViewModel(IResolutionRoot resolutionRoot, IKernel kernel) 
         {
             _resolutionRoot = resolutionRoot;
@@ -96,8 +106,8 @@ namespace GridHelpersSample
         }
         public List<ButtonViewModel> CreateButton()
         {
-            var myView = _resolutionRoot.Get<Main2View>();
-            var t = myView.MainGrid;
+            //var myView = _resolutionRoot.Get<Main2View>();
+            //var t = myView.MainGrid;
             var list = new List<ButtonViewModel>();
             for (int i = 0; i < int.Parse(RowCount); i++)
             {
@@ -119,6 +129,7 @@ namespace GridHelpersSample
         private void AddNewContent()
         {
             ButtonViewModels = new BindableCollection<ButtonViewModel>(CreateButton());
+            //myGridViewModel = new MyGridViewModel(RowCount, ColumnCount, StarRows, StarColumns, PixelRows, PixelColumns);
             myGridViewModel = new MyGridViewModel(this);
         }
     }
