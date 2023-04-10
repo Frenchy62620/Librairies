@@ -25,12 +25,12 @@
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid ShowGridLines="true" 
-                          gh:GridHelpers.RowCount = "{Binding RowCount, Mode=TwoWay}"
-                          gh:GridHelpers.ColumnCount = "{Binding ColumnCount, Mode=TwoWay}"
-                          gh:GridHelpers.StarRows = "{Binding StarRows, Mode=TwoWay}"
-                          gh:GridHelpers.StarColumns = "{Binding StarColumns, Mode=TwoWay}"
-                          gh:GridHelpers.PixelRows = "{Binding PixelRows, Mode=TwoWay}"
-                          gh:GridHelpers.PixelColumns = "{Binding PixelColumns, Mode=TwoWay}" >
+                          gh:GridHelpers.RowCount = "{Binding RowCount}"
+                          gh:GridHelpers.ColumnCount = "{Binding ColumnCount}"
+                          gh:GridHelpers.StarRows = "{Binding StarRows}"
+                          gh:GridHelpers.StarColumns = "{Binding StarColumns}"
+                          gh:GridHelpers.PixelRows = "{Binding PixelRows}"
+                          gh:GridHelpers.PixelColumns = "{Binding PixelColumns}" >
                     </Grid>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>

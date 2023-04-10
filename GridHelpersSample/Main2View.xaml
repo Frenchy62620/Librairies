@@ -3,12 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sb="clr-namespace:ShadowedTextBox;assembly=ShadowedTextBox"        
         xmlns:gh="clr-namespace:GridHelpers;assembly=GridHelpers"
         xmlns:cal="http://www.caliburnproject.org"       
         xmlns:local="clr-namespace:GridHelpersSample"
         mc:Ignorable="d"
         Title="Main2View" Height="600" Width="1000">
     <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Width" Value="120" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="Blue" />
+        </Style>
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="Width" Value="120" />
             <Setter Property="Margin" Value="5" />
@@ -33,6 +41,32 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="shadowedLabelStyle">
+            <Setter Property="TextBlock.Foreground" Value="{x:Static SystemColors.ControlDarkBrush}" />
+            <Setter Property="FrameworkElement.Opacity" Value="0.8" />
+            <Setter Property="TextBlock.FontSize" Value="15" />
+            <Setter Property="TextBlock.FontStyle" Value="Italic" />
+            <Setter Property="TextBlock.VerticalAlignment" Value="Center" />            
+            <Setter Property="TextBlock.Margin" Value="5,0,0,0" />
+        </Style>
+
+        <Style TargetType="{x:Type sb:ShadowedTextBox}">
+            <Setter Property="Width" Value="120" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Regular" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="LabelStyle" Value="{StaticResource shadowedLabelStyle}" />
+            <Style.Triggers>
+                <Trigger Property="Name" Value="RowCount">
+                    <Setter Property="Width" Value="100"/>
+                </Trigger>
+                <Trigger Property="Name" Value="ColumnCount">
+                    <Setter Property="Width" Value="100"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Grid x:Name="MainGrid"
         gh:GridHelpers.RowCount="2"
@@ -42,22 +76,22 @@
         <StackPanel Orientation="Vertical" Grid.Row="0" >
             <Separator />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label Content="RowCount:" Style="{StaticResource LabelStyle}" />
-                <TextBox x:Name="RowCount" Style="{StaticResource TextBoxStyle}" />
-                <Label Content="StarRows:" Style="{StaticResource LabelStyle}" />
-                <TextBox x:Name="StarRows" Style="{StaticResource TextBoxStyle}" />
-                <Label Content="PixelRows:" Style="{StaticResource LabelStyle}" />
-                <TextBox x:Name="PixelRows" Style="{StaticResource TextBoxStyle}" />
+                <!--<Label Content="RowCount:" />-->
+                <sb:ShadowedTextBox x:Name="RowCount"  />
+                <!--<Label Content="StarRows:" />-->
+                <sb:ShadowedTextBox x:Name="StarRows" Label="StarRows" />
+                <!--<Label Content="PixelRows:" />-->
+                <sb:ShadowedTextBox x:Name="PixelRows" Label="PixelRows" />
                 <Button x:Name="Valider" Content="Valider la saisie" Width="100" 
                         Margin="30,20,0,-20" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label Content="ColumnCount:" Style="{StaticResource LabelStyle}" />
-                <TextBox x:Name="ColumnCount" Style="{StaticResource TextBoxStyle}" />
-                <Label Content="StarColumns:" Style="{StaticResource LabelStyle}" />
-                <TextBox x:Name="StarColumns" Style="{StaticResource TextBoxStyle}" />
-                <Label Content="PixelColumns:" Style="{StaticResource LabelStyle}" />
-                <TextBox x:Name="PixelColumns" Style="{StaticResource TextBoxStyle}" />
+                <!--<Label Content="ColumnCount:" Style="{StaticResource LabelStyle}" />-->
+                <sb:ShadowedTextBox x:Name="ColumnCount" Label="ColumnCount" />
+                <!--<Label Content="StarColumns:" Style="{StaticResource LabelStyle}" />-->
+                <sb:ShadowedTextBox x:Name="StarColumns" Label="StarColumns"/>
+                <!--<Label Content="PixelColumns:" Style="{StaticResource LabelStyle}" />-->
+                <sb:ShadowedTextBox x:Name="PixelColumns" Label="PixelColumns" />
                 <Button Width="100" Visibility="Hidden" Height="0" Margin="30,0,0,0"/>
             </StackPanel>
             <Separator />

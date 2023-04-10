@@ -8,13 +8,17 @@
 
   <ItemGroup>
     <PackageReference Include="Caliburn.Micro" Version="4.0.212" />
-    <PackageReference Include="Caliburn.Micro.Core" Version="4.0.212" />
     <PackageReference Include="Ninject" Version="3.3.6" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GridHelpers\GridHelpers.csproj" />
     <ProjectReference Include="..\ShadowedTextBox\ShadowedTextBox.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 
 </Project>

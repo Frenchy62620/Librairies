@@ -9,6 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GridHelpers", "GridHelpers\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GridHelpersSample", "GridHelpersSample\GridHelpersSample.csproj", "{C71943F7-791B-4C45-952C-B079BA7FD0CB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShadowedTextBox", "ShadowedTextBox\ShadowedTextBox.csproj", "{FD2C94D7-D16B-427B-9C9F-D8A5E7E47BDB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShadowedTextBoxSample", "ShadowedTextBoxSample\ShadowedTextBoxSample.csproj", "{75EC5B38-3A7C-4DCB-B02B-55E0EEAF750D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FD2C94D7-D16B-427B-9C9F-D8A5E7E47BDB} = {FD2C94D7-D16B-427B-9C9F-D8A5E7E47BDB}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{AF16787C-6608-4681-92ED-F7DD42D30EBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +32,18 @@ Global
 		{C71943F7-791B-4C45-952C-B079BA7FD0CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C71943F7-791B-4C45-952C-B079BA7FD0CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C71943F7-791B-4C45-952C-B079BA7FD0CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD2C94D7-D16B-427B-9C9F-D8A5E7E47BDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD2C94D7-D16B-427B-9C9F-D8A5E7E47BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD2C94D7-D16B-427B-9C9F-D8A5E7E47BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD2C94D7-D16B-427B-9C9F-D8A5E7E47BDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75EC5B38-3A7C-4DCB-B02B-55E0EEAF750D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75EC5B38-3A7C-4DCB-B02B-55E0EEAF750D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75EC5B38-3A7C-4DCB-B02B-55E0EEAF750D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75EC5B38-3A7C-4DCB-B02B-55E0EEAF750D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF16787C-6608-4681-92ED-F7DD42D30EBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF16787C-6608-4681-92ED-F7DD42D30EBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF16787C-6608-4681-92ED-F7DD42D30EBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF16787C-6608-4681-92ED-F7DD42D30EBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +51,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{BB89ADA4-E3CC-4591-8777-12340CC3598C} = {677AFD19-0486-4183-8FA1-9716EBEDE300}
 		{C71943F7-791B-4C45-952C-B079BA7FD0CB} = {677AFD19-0486-4183-8FA1-9716EBEDE300}
+		{FD2C94D7-D16B-427B-9C9F-D8A5E7E47BDB} = {677AFD19-0486-4183-8FA1-9716EBEDE300}
+		{75EC5B38-3A7C-4DCB-B02B-55E0EEAF750D} = {677AFD19-0486-4183-8FA1-9716EBEDE300}
+		{AF16787C-6608-4681-92ED-F7DD42D30EBB} = {677AFD19-0486-4183-8FA1-9716EBEDE300}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {804E7D57-12C8-4AF3-A8CA-62534B1714C3}

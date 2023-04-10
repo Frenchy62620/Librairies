@@ -1,0 +1,75 @@
+﻿<Window x:Class="ShadowedTextBoxSample.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sb="clr-namespace:ShadowedTextBox;assembly=ShadowedTextBox"
+        xmlns:cal="http://www.caliburnproject.org" 
+        xmlns:local="clr-namespace:ShadowedTextBoxSample"
+        mc:Ignorable="d"
+        Title="MainView" Height="500" Width="700" Style="{StaticResource dataWindow}">
+    <Window.Resources>
+
+        <Style x:Key="shadowedLabelStyle">
+            <Setter Property="TextBlock.Foreground" Value="{x:Static SystemColors.ControlDarkBrush}" />
+            <Setter Property="FrameworkElement.Opacity" Value="0.8" />
+            <Setter Property="TextBlock.FontSize" Value="12" />
+            <Setter Property="TextBlock.FontStyle" Value="Italic" />
+            <Setter Property="TextBlock.Margin" Value="8,4,4,4" />
+        </Style>
+
+        <Style TargetType="{x:Type sb:ShadowedTextBox}">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="5,2,2,2" />
+            <Setter Property="LabelStyle" Value="{StaticResource shadowedLabelStyle}" />
+        </Style>
+
+    </Window.Resources>
+    <Border Style="{StaticResource dataBorder}">
+        <Grid DataContext="{x:Static local:Customer.GetHomerSimpson}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="28" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="28" />
+                <RowDefinition Height="28" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="28" />
+                <RowDefinition Height="28" />
+                <RowDefinition Height="28" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="4*" />
+                </Grid.ColumnDefinitions>
+                <sb:ShadowedTextBox Label="First Name" Text="{Binding FirstName}" />
+                <sb:ShadowedTextBox Label="Middle Name" Text="{Binding MiddleName}" Grid.Column="1" />
+                <sb:ShadowedTextBox Label="Last Name" Text="{Binding LastName}" Grid.Column="2" />
+            </Grid>
+
+            <sb:ShadowedTextBox Label="Job Title" Text="{Binding JobTitle}" Grid.Row="2" />
+
+            <sb:ShadowedTextBox Label="Company" Text="{Binding Company}" Grid.Row="3" />
+
+            <sb:ShadowedTextBox Label="Address1" Text="{Binding Address1}" Grid.Row="5" />
+
+            <sb:ShadowedTextBox Label="Address2" Text="{Binding Address2}" Grid.Row="6" />
+
+            <Grid Grid.Row="7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <sb:ShadowedTextBox Label="City" Text="{Binding City}" />
+                <sb:ShadowedTextBox Label="State" Text="{Binding State}" Grid.Column="1" />
+                <sb:ShadowedTextBox Label="Zip" Text="{Binding Zip}" Grid.Column="2" />
+            </Grid>
+
+        </Grid>
+    </Border>
+</Window>
+

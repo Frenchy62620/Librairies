@@ -1,0 +1,177 @@
+﻿<Window x:Class="GridHelpersSample.Main3View"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GridHelpersSample"
+        mc:Ignorable="d"
+        Title="Main3view" Height="450" Width="800">
+    <!--Set the default style for the RadioButton-->
+    <Window.Resources>
+        <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
+            <Style.Triggers>
+
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="VerticalAlignment" Value="Bottom"/>
+                </Trigger>
+
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="True"/>
+                        <Condition Property="IsChecked" Value="False"/>
+                    </MultiTrigger.Conditions>
+
+                    <MultiTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.CornerRadius)">
+                                    <ObjectAnimationUsingKeyFrames.KeyFrames>
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <CornerRadius BottomLeft="40" BottomRight="40" TopLeft="40" TopRight="40"/>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.025">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <CornerRadius BottomLeft="37" BottomRight="37" TopLeft="37" TopRight="37"/>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.05">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <CornerRadius BottomLeft="34" BottomRight="34" TopLeft="34" TopRight="34"/>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.075">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <CornerRadius BottomLeft="31" BottomRight="31" TopLeft="31" TopRight="31"/>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.1">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <CornerRadius BottomLeft="28" BottomRight="28" TopLeft="28" TopRight="28"/>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+                                    </ObjectAnimationUsingKeyFrames.KeyFrames>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </MultiTrigger.EnterActions>
+
+                    <MultiTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.CornerRadius)">
+                                    <ObjectAnimationUsingKeyFrames.KeyFrames>
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <CornerRadius BottomLeft="28" BottomRight="28" TopLeft="28" TopRight="28"/>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.025">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <CornerRadius BottomLeft="31" BottomRight="31" TopLeft="31" TopRight="31"/>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.05">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <CornerRadius BottomLeft="34" BottomRight="34" TopLeft="34" TopRight="34"/>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.075">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <CornerRadius BottomLeft="37" BottomRight="37" TopLeft="37" TopRight="37"/>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.1">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <CornerRadius BottomLeft="40" BottomRight="40" TopLeft="40" TopRight="40"/>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+                                    </ObjectAnimationUsingKeyFrames.KeyFrames>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </MultiTrigger.ExitActions>
+                </MultiTrigger>
+
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="BorderThickness" Value="3"/>
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.CornerRadius)">
+                                    <ObjectAnimationUsingKeyFrames.KeyFrames>
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.1">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <CornerRadius BottomLeft="28" BottomRight="28" TopLeft="28" TopRight="28"/>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+                                    </ObjectAnimationUsingKeyFrames.KeyFrames>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.CornerRadius)">
+                                    <ObjectAnimationUsingKeyFrames.KeyFrames>
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <CornerRadius BottomLeft="28" BottomRight="28" TopLeft="28" TopRight="28"/>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.025">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <CornerRadius BottomLeft="31" BottomRight="31" TopLeft="31" TopRight="31"/>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.05">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <CornerRadius BottomLeft="34" BottomRight="34" TopLeft="34" TopRight="34"/>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.075">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <CornerRadius BottomLeft="37" BottomRight="37" TopLeft="37" TopRight="37"/>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.15">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <CornerRadius BottomLeft="40" BottomRight="40" TopLeft="40" TopRight="40"/>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+                                    </ObjectAnimationUsingKeyFrames.KeyFrames>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+
+    <!--Place the RadioButton in your desired layout (Grid in this example)-->
+    <Grid>
+        <RadioButton Style="{StaticResource RadioButtonStyle}" Content="Option 1" Width="100" Height="100"/>
+    </Grid>
+</Window>
