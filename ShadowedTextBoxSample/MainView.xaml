@@ -6,7 +6,7 @@
         xmlns:sb="clr-namespace:ShadowedTextBox;assembly=ShadowedTextBox"
         xmlns:cal="http://www.caliburnproject.org" 
         xmlns:local="clr-namespace:ShadowedTextBoxSample"
-        mc:Ignorable="d"
+        mc:Ignorable="d" Deactivated="Window_Deactivated"
         Title="MainView" Height="500" Width="700" Style="{StaticResource dataWindow}">
     <Window.Resources>
 

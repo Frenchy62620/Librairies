@@ -3,8 +3,9 @@ using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using UserControlSample.ViewModels;
 
-namespace ShadowedTextBoxSample
+namespace UserControlSample
 {
     public class Bootstrapper : BootstrapperBase
     {
@@ -25,7 +26,7 @@ namespace ShadowedTextBoxSample
             kernel.Bind<IEventAggregator>().To<EventAggregator>().InSingletonScope();
             //kernel.Bind<ILog>().To<DebugLogger>().InSingletonScope();
 
-            kernel.Bind<ILog>().ToMethod(x => new DebugLogger());
+            //kernel.Bind<ILog>().ToMethod(x => new DebugLogger());
 
             //var bindings0 = kernel.GetBindings(typeof(MyGridViewModel));
             var bindings1 = kernel.GetBindings(typeof(ILog));
