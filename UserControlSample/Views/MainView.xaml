@@ -3,11 +3,36 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cal="http://www.caliburnproject.org"
         xmlns:uc="clr-namespace:CustomControl"
         xmlns:local="clr-namespace:UserControlSample.Views"
         mc:Ignorable="d"
         Title="MainView" Height="450" Width="800">
     <Grid>
+        <ItemsControl ItemsSource="{Binding Lines}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas Background="LightYellow" Margin="10 0" Width="{Binding CanvasWidth}" Height="{Binding CanvasHeight}" Focusable="True"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                    <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Rectangle Width="{Binding Width}"
+                               Height="{Binding Height}"
+                               Stroke="Black" StrokeThickness="1"
+                               Fill="Black" 
+                               cal:Message.Attach="[Event MouseDown] = [Action ChangeColor($source)]"
+                    />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        
         <uc:UserControlView FileNameItemsSource="{Binding FileNames}" Width="300" Height="80" Background="Aqua" Margin="20" Padding="5" 
                             HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
     </Grid>
