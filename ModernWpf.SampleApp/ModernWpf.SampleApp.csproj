@@ -1,0 +1,90 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\AppIcon.ico" />
+    <None Remove="Assets\Contacts.txt" />
+    <None Remove="Assets\file.png" />
+    <None Remove="Assets\folder.png" />
+    <None Remove="Assets\mtns.csv" />
+    <None Remove="Assets\SampleMedia\cliff.jpg" />
+    <None Remove="Assets\SampleMedia\LandscapeImage1.jpg" />
+    <None Remove="Assets\SampleMedia\LandscapeImage2.jpg" />
+    <None Remove="Assets\SampleMedia\LandscapeImage3.jpg" />
+    <None Remove="Assets\SampleMedia\LandscapeImage4.jpg" />
+    <None Remove="Assets\SampleMedia\LandscapeImage5.jpg" />
+    <None Remove="Assets\SampleMedia\LandscapeImage6.jpg" />
+    <None Remove="Assets\SampleMedia\LandscapeImage7.jpg" />
+    <None Remove="Assets\SampleMedia\LandscapeImage8.jpg" />
+    <None Remove="Assets\SampleMedia\rainier.jpg" />
+    <None Remove="Assets\Slices2.png" />
+    <None Remove="Assets\TabViewIcons\cmd.png" />
+    <None Remove="Assets\TabViewIcons\linux.png" />
+    <None Remove="Assets\TabViewIcons\powershell.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\SampleMedia\cliff.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\SampleMedia\rainier.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ModernWpfUI" Version="0.9.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SamplesCommon\SamplesCommon.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\AppIcon.ico" />
+    <Resource Include="Assets\Contacts.txt" />
+    <Resource Include="Assets\file.png" />
+    <Resource Include="Assets\folder.png" />
+    <Resource Include="Assets\mtns.csv" />
+    <Resource Include="Assets\SampleMedia\LandscapeImage1.jpg" />
+    <Resource Include="Assets\SampleMedia\LandscapeImage2.jpg" />
+    <Resource Include="Assets\SampleMedia\LandscapeImage3.jpg" />
+    <Resource Include="Assets\SampleMedia\LandscapeImage4.jpg" />
+    <Resource Include="Assets\SampleMedia\LandscapeImage5.jpg" />
+    <Resource Include="Assets\SampleMedia\LandscapeImage6.jpg" />
+    <Resource Include="Assets\SampleMedia\LandscapeImage7.jpg" />
+    <Resource Include="Assets\SampleMedia\LandscapeImage8.jpg" />
+    <Resource Include="Assets\Slices2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\TabViewIcons\cmd.png" />
+    <Resource Include="Assets\TabViewIcons\linux.png" />
+    <Resource Include="Assets\TabViewIcons\powershell.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>

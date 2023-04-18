@@ -1,6 +1,11 @@
-﻿using CustomControl;
+﻿using Caliburn.Micro;
+using CustomControl;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace UserControlSample.Views
 {
@@ -9,6 +14,7 @@ namespace UserControlSample.Views
     /// </summary>
     public partial class MainView : Window
     {
+
         public MainView()
         {
             InitializeComponent();
@@ -24,5 +30,35 @@ namespace UserControlSample.Views
           typeof(ObservableCollection<string>),
           typeof(UserControlView),
           new PropertyMetadata(default));
+
+        public void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("^-?[0-9]*[\\.,]?[0-9]?[0-9]?$");
+            var tb = sender as TextBox;
+            var futureText = "";
+            if (tb.SelectedText != "")
+            {
+                futureText = tb.Text.Replace(tb.SelectedText, e.Text);
+                e.Handled = !regex.IsMatch(futureText);
+                return;
+            }
+
+            futureText = tb.Text + e.Text;
+            e.Handled = !regex.IsMatch(futureText);
+        }
+        private void OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            var myInput = sender as TextBox;
+            myInput.Text = myInput.Text.Replace(",", ".").Trim();
+            myInput.CaretIndex = myInput.Text.Length;
+        }
+
+        private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            var myInput = sender as TextBox;
+            System.Diagnostics.Debug.WriteLine(myInput.SelectedText);
+        }
+
+
     }
 }

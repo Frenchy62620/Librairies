@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="WpfApp1.UserControls.SliderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApp1.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Image x:Name="Scale" Margin="0,13,0,0" Width="{Binding SliderWidth}" Height="{Binding SliderHeight}" Source="{Binding CroppedImage}" 
+               VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <ItemsControl ItemsSource="{Binding Pickers}" Margin="0,0,0,0">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="0,120,0,0" Height="90" Width="1080" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <local:MarkerPicker Margin="6,0" Style="{DynamicResource PickerStyle}"
+                                        Height="84" Width="96"
+                                        Number="{Binding Number}" Active="{Binding Active}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>

@@ -8,8 +8,45 @@
         xmlns:local="clr-namespace:UserControlSample.Views"
         mc:Ignorable="d"
         Title="MainView" Height="450" Width="800">
+
     <Grid>
-        <ItemsControl ItemsSource="{Binding Lines}">
+        <Grid>
+            <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Visible" Height="50"
+             cal:Message.Attach="[Event PreviewMouseWheel] = [Action ListView_PreviewMouseWheel($source, $event)]"
+>
+                <ListView 
+            Margin="10,0,10,0"
+              Width="400"
+
+            ItemsSource="{Binding Path=Devices}" >
+
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+
+            </ListView>
+            </ScrollViewer>
+        </Grid>
+        <Border CornerRadius="10" Padding="2" Grid.Column="1" Width="101" RenderTransformOrigin="0.844,0.439"
+                VerticalAlignment="Top" HorizontalAlignment="Left" Margin="42,305,0,10">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="LightBlue" Offset="0" />
+                    <GradientStop Color="Blue" Offset="0.75" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Button Cursor="Hand" x:Name="login" BorderBrush="Transparent" Background="White" Foreground="Black" FontSize="24"
+                    Content="LOG IN" FontWeight="Bold">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="{Binding CR}"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Border>
+        <!--<ItemsControl ItemsSource="{Binding Lines}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas Background="LightYellow" Margin="10 0" Width="{Binding CanvasWidth}" Height="{Binding CanvasHeight}" Focusable="True"/>
@@ -31,9 +68,10 @@
                     />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        
-        <uc:UserControlView FileNameItemsSource="{Binding FileNames}" Width="300" Height="80" Background="Aqua" Margin="20" Padding="5" 
-                            HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+        </ItemsControl>-->
+
+        <!--<TextBox Width="100" Height="50" Background="Azure" PreviewTextInput="NumberValidationTextBox" TextChanged="OnTextChanged" SelectionChanged="TextBox_SelectionChanged"/>-->
+        <!--<uc:UserControlView FileNameItemsSource="{Binding FileNames}" Width="300" Height="80" Background="Aqua" Margin="20" Padding="5" 
+                            HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>-->
     </Grid>
 </Window>

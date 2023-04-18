@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\FlipView.png" />
+    <None Remove="Assets\SampleMedia\cliff.jpg" />
+    <None Remove="Assets\SampleMedia\grapes.jpg" />
+    <None Remove="Assets\SampleMedia\rainier.jpg" />
+    <None Remove="Assets\SampleMedia\sunset.jpg" />
+    <None Remove="Assets\SampleMedia\valley.jpg" />
+    <None Remove="Assets\TimePicker.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\SampleMedia\cliff.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\SampleMedia\grapes.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\SampleMedia\rainier.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\SampleMedia\sunset.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\SampleMedia\valley.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MahApps.Metro" Version="2.4.9" />
+    <PackageReference Include="ModernWpfUI" Version="0.9.6" />
+    <PackageReference Include="ModernWpfUI.MahApps" Version="0.9.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SamplesCommon\SamplesCommon.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\FlipView.png" />
+    <Resource Include="Assets\TimePicker.png" />
+  </ItemGroup>
+
+</Project>

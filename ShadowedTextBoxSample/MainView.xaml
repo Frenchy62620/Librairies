@@ -65,7 +65,8 @@
                     <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
                 <sb:ShadowedTextBox Label="City" Text="{Binding City}" />
-                <sb:ShadowedTextBox Label="State" Text="{Binding State}" Grid.Column="1" />
+                <sb:ShadowedTextBox Label="State" Text="{Binding State}" Grid.Column="1" 
+                                    KeyUp="ShadowedTextBox_KeyUp"/>
                 <sb:ShadowedTextBox Label="Zip" Text="{Binding Zip}" Grid.Column="2" />
             </Grid>
 

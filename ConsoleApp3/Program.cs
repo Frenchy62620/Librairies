@@ -3,29 +3,31 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ConsoleApp3
 {
-    internal class Program
+    public class Program
     {
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
+        [DllImport("user32.dll", EntryPoint = "FindWindowEx")]
+        public static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
         static void Main(string[] args)
         {
-            var jObj = JObject.Parse(File.ReadAllText(@"json1.json"));
-            jObj["body"].Where(x => (string)x["type"] == "ActionSet").First().Remove();
-            var json = jObj.ToString();
-            
-            var jtok = JToken.Parse(File.ReadAllText(@"json1.json"));
+            IntPtr notepadHandle = FindWindowEx(IntPtr.Zero, IntPtr.Zero, "Notepad", null);
 
-            var filteredBody = jtok["body"].Where(j => j["type"] != null && !j["type"].Any(t => t.Value<string>() == "Action.Submit")).ToList();
-
-            jtok["body"] = new JArray(filteredBody);
-
-            var result = jtok.ToString();
-
-            var list = jtok["body"].ToList();
-            var result1 = jtok["body"].ToList().Select(x => x["actions"]).SelectMany(x => x["type"]).Where(y => y.Any(c => c.Value<string>() == "Action.Submit")).ToList();
+            if (notepadHandle == IntPtr.Zero)
+            {
+                Console.WriteLine("Notepad is not running.");
+            }
+            else
+            {
+                Console.WriteLine("Notepad handle found: " + notepadHandle.ToString());
+            }
+            MoveWindow(notepadHandle, 0, 0, 700, 300, false);
         }
     }
 }
