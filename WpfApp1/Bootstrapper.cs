@@ -3,6 +3,7 @@ using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using WpfApp1.ViewModels;
 
 namespace WpfApp1
 {

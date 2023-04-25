@@ -3,10 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cal="http://www.caliburnproject.org"
         xmlns:local="clr-namespace:WpfApp1.Views"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
+        Title="MainView" Height="600" Width="800">
     <Grid>
-        
+        <StackPanel>
+            <StackPanel>
+                <Button x:Name="DoModal" Width="200" Height="100" Content="Open Modal" FontSize="18pt"  Margin="20"/>
+                <Button x:Name="DoClose" Width="200" Height="100" Content="Close App" FontSize="18pt" Margin="20" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="ClickOnMe" Width="100" Height="50" Content="Click On Me"   Margin="20" />
+                <TextBox x:Name="Message" Width="100" Height="50" Background="Bisque" Margin="20"/>
+                <TextBox Width="100" Height="50" Background="Bisque" 
+                 cal:Message.Attach="[Event MouseEnter] = [Action Text_MouseEnter($source, $Eventargs)]" />
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

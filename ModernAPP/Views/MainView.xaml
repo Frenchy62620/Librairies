@@ -1,0 +1,34 @@
+﻿<Window x:Class="ModernAPP.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:local="clr-namespace:ModernAPP.Views"
+        mc:Ignorable="d"
+        Title="MainView" Height="450" Width="800">
+    <Grid>
+        <TextBox Width="150" Height="70"
+                VerticalAlignment="Top" 
+                 VerticalContentAlignment="Center"
+                ui:ControlHelper.PlaceholderText="Name" ui:ControlHelper.PlaceholderForeground="DarkGreen">
+
+        </TextBox>
+        <TextBox Width="150" Height="70"
+                VerticalAlignment="Center" 
+                 VerticalContentAlignment="Center"
+                ui:ControlHelper.PlaceholderText="Name" ui:ControlHelper.PlaceholderForeground="DarkGreen">
+            <!--<Color x:Key="TextFillColorSecondary">#93000000</Color>
+            <Color x:Key="TextFillColorTertiary">#72000000</Color>-->
+            <!--<TextBox.Style>
+                <Style>
+                    <Style.Triggers>
+                        <Trigger>
+                            <Setter Property=""
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>-->
+        </TextBox>
+    </Grid>
+</Window>
