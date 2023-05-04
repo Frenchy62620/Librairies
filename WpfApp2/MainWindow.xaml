@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:WpfApp2"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -10,6 +11,13 @@
         <local:MainViewModel/>
     </Window.DataContext>
     <Grid>
-        <local:RectZone Grid.Column="0" CanImageBrush="{Binding TrABrush, Mode=TwoWay}"/>
+        <DatePicker SelectedDate="{Binding SelectedDate}" Width="100" Height="50">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectedDateChanged">
+                    <i:InvokeCommandAction Command="{Binding DateSelectedCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </DatePicker>
+        <!--<local:RectZone Grid.Column="0" CanImageBrush="{Binding TrABrush, Mode=TwoWay}"/>-->
     </Grid>
 </Window>

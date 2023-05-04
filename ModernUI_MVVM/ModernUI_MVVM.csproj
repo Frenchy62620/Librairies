@@ -16,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="XamlBehaviors.Mirror" Version="1.1.29" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Images\man.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

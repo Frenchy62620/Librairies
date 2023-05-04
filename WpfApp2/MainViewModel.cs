@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
@@ -12,7 +13,18 @@ namespace WpfApp2
         {
             SetBrushes();
         }
+        private DateTime _selectedDate;
+        public DateTime SelectedDate
+        {
+            get { return _selectedDate; }
+            set { _selectedDate = value; OnPropertyChanged(); }
+        }
 
+        public void DateSelectedCommand()
+        {
+
+        }
+        //public DateSelectedCommand DateSelectedCommand { get; set; }
         private ImageBrush _trABrush;
         public ImageBrush TrABrush
         {

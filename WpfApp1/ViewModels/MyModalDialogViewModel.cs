@@ -1,11 +1,5 @@
 ﻿using Caliburn.Micro;
 using Ninject.Syntax;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace WpfApp1.ViewModels
 {
@@ -27,10 +21,10 @@ namespace WpfApp1.ViewModels
         {
             await TryCloseAsync(false);
         }
-        public override async Task<bool> CanCloseAsync(CancellationToken cancellationToken)
-        {
-            await Task.Delay(500);
-            return true;//true to accept, false to refuse the close
-        }
+        //public override async Task<bool> CanCloseAsync(CancellationToken cancellationToken)
+        //{
+        //    await Task.Delay(500);
+        //    return true;//true to accept, false to refuse the close
+        //}
     }
 }

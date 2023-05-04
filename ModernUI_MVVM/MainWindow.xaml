@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:ModernUI_MVVM"
         xmlns:viewModel="clr-namespace:ModernUI_MVVM.MVVM.ViewModels"
         mc:Ignorable="d"
@@ -56,8 +57,15 @@
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenubuttonTheme}"
-                             Margin="0,0,0,320"/>
+                             Margin="0,0,0,260"/>
 
+                <DatePicker SelectedDate="{Binding SelectedDate}" Width="100" Height="40" Margin="10">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedDateChanged">
+                            <i:InvokeCommandAction Command="{Binding DateSelectedCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </DatePicker>
                 <RadioButton Content="Close APP"
                              Height="50"
                              Foreground="White"

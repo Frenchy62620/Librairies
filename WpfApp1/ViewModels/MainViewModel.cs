@@ -2,8 +2,6 @@
 using Ninject;
 using Ninject.Syntax;
 using System.Dynamic;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -40,14 +38,13 @@ namespace WpfApp1.ViewModels
 
         public async void DoClose()
         {
-            //Close Main Window
             await TryCloseAsync();
         }
-        public override async Task<bool> CanCloseAsync(CancellationToken cancellationToken)
-        {
-            await Task.Delay(200);
-            return true; //false to refuse to close, true to accept
-        }
+        //public override async Task<bool> CanCloseAsync(CancellationToken cancellationToken)
+        //{
+        //    await Task.Delay(200);
+        //    return true; //false to refuse to close, true to accept
+        //}
         #endregion
 
         #region second stackpanel
